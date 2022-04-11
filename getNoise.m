@@ -1,30 +1,15 @@
-% sigma_x = 0.03;
-% sigma_y = 0.03;
-% sigma_theta = 0.02;
-% 
-% sigma_r = 0.04;
-% sigma_beta = 0.04;
-% 
-% sigma_x0 = 0.01;
-% sigma_y0 = 0.01;
-% sigma_theta0 = 0.02;
-% 
-% step = 500;
-% k = 50;
+sigma_x = 0.05;
+sigma_y = 0.05;
+sigma_theta = 0.03;
 
-% Noise from the dataset setup
-sigma_x = 0.001;
-sigma_y = 0.001;
-sigma_theta = 0.002;
-sigma_r = 1;
-sigma_beta = deg2rad(3);
+sigma_r = 0.04;
+sigma_beta = 0.04;
 
-sigma_x0 = 0.001;
-sigma_y0 = 0.001;
+sigma_x0 = 0.01;
+sigma_y0 = 0.01;
 sigma_theta0 = 0.02;
 
-
-step = 10000;
+step = 600;
 k = 50;
 
 W = [normrnd(0, sigma_theta0) normrnd(0, sigma_theta, 1, step-1); 

@@ -2,7 +2,7 @@
 mode = 5;
 if mode ==1
     % % spars
-    L0 = [3 6 3 12 7 8 0 10 15 2 10 15];     % landmarks [x1 y1 x2 y2...]
+    L = [3 6 3 12 7 8 0 10 15 2 10 15];     % landmarks [x1 y1 x2 y2...]
 elseif mode == 2
     % circle
     phi = [0:pi/10:2*pi-pi/10];
@@ -37,14 +37,10 @@ elseif mode == 4
     % obstacle = [90 80 8 85 15 5]';
     obstacle = [];
     k = 20;
-    L0 = randi([0, 20], 1, 2*k);
+    L0 = randi([1, 20], 1, 2*k);
 elseif mode == 5
     load map1_EKFSLAM
     L0 = State';
-%     for j = 1:2:length(L0)
-%         L0(j) = L0(j)+200;
-%         L0(j+1) = L0(j+1)+120;
-%     end
 end
 %%
 obstacle = [];

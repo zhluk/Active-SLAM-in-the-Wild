@@ -3,17 +3,17 @@ close all;
 clc;
 %%
 
-round = 1;
+%round = 1;
 
 % noise settings
-sigma_x = 0.001;
-sigma_y = 0.001;
-sigma_theta = 0.002;
-sigma_r = 1;
-sigma_beta = deg2rad(3);
+sigma_x = 0.03;
+sigma_y = 0.03;
+sigma_theta = 0.02;
+sigma_r = 0.04;
+sigma_beta = 0.04;
 
-sigma_x0 = 0.001;
-sigma_y0 = 0.001;
+sigma_x0 = 0.01;
+sigma_y0 = 0.01;
 sigma_theta0 = 0.02;
 
 % cov_init = diag([0.02, 0.001, 0.001]);
@@ -22,16 +22,16 @@ cov_u = diag([sigma_theta^2, sigma_x^2, sigma_y^2]);
 cov_z = diag([sigma_r^2, sigma_beta^2]);
 save data_NLS cov_u cov_z
 
-step = 2000;     % number of total steps
+step = 600;     % number of total steps (error if larger than 500)
 x0 = [0; 0; 0]; % initial pose
 u = [];
 range = 30;     % sensor range
 head = 0;
 
 resultId = 0;   % name for outputfile
-mode = 1;       % 1 is EKF, 2 is NLS, 3 is IEKF
+mode = 3;       % 1 is EKF, 2 is NLS, 3 is IEKF
 op_2 = 1;       % 1 is NLSI, 2 is NLSlb
-op = 4;         % get u options
+op = 8;         % get u options
 
 noise = 3;      % 1 random, 2 zero, 3 load
 sl = 0;         % for file writing
@@ -39,9 +39,9 @@ sl2 = 1;        % for file wrting
 record = 1;     % for video recording
 fi = 1;         % video frame
 
-wk = 1;       % weight of the number of the observed (adjust upper/lower bound)
-wn = 0;         % weight of the number of the observed (adjust upper/lower bound)
-c = 20;          % upper/lower bound offset constant
+wk = 0.5;       % weight of the number of the observed (adjust upper/lower bound)
+wn = 1;         % weight of the number of the observed (adjust upper/lower bound)
+c = 5;          % upper/lower bound offset constant
 range_goal = 100; % acceptable returnning distance for improving localization
 
 if noise == 3
@@ -56,8 +56,8 @@ load map1 L0 obstacle
 Le0 = [-200 -120 -200 220 100 220 100 -120]; % environment area vertices
 
 % creat a list of uniformly distributed exploration points (Le)
-density = 20;     % density of uniformly distrbuted points
-[X,Y] = meshgrid(linspace(Le0(1),Le0(5),density),linspace(Le0(2),Le0(4),density));
+space = 10;     % space between neighboring points
+[X,Y] = meshgrid(linspace(Le0(1),Le0(5),space),linspace(Le0(2),Le0(4),space));
 X = reshape(X,[],1);
 Y = reshape(Y,[],1);
 Le = [];
@@ -65,6 +65,9 @@ for i = 1:length(X)
     Le = [Le X(i) Y(i)];
 end
 
+Le = [25 50 55 75 22 130 55 75 -93 -77 -125 -55 -150 -20 -170 80 -127 175];
+%Le = exploration2();
+%Le = L0;
 k0 = length(L0)/2; % number of initial goal point
 count = 0;
 
@@ -83,11 +86,11 @@ end
 set(gca,'FontSize',16); 
 for j = 1:length(obstacle)/3
     r = obstacle(3*j);
-    c_o = obstacle(3*j - 2:3*j - 1);
+    c = obstacle(3*j - 2:3*j - 1);
     phi = [0:(pi/50):(2*pi)];
     for i = 1:101
         rect = [r*cos(phi(i)) ; r*sin(phi(i))];
-        obs(:,i) = rect + c_o;
+        obs(:,i) = rect + c;
     end
     plot(obs(1,:), obs(2,:), '-black');
     hold on;
@@ -135,7 +138,7 @@ if sl2 == 1
     end
     if op == 1
         str_op = 'pre_';
-    elseif op == 4 || op == 5
+    elseif op == 4 || op == 8
         str_op = '';
     end
     fer = fopen(['result/rand_' str_op str '_er_' num2str(resultId) '.txt'], 'w+');
@@ -295,6 +298,8 @@ P = [cov_init zeros(3, 2*k);
 P_last = P;     % Last state convariance
 xrs = x(1:3);   % robot state
 
+
+
 % plot initial information
 ellipse = 41;   % number of point for sigma contour
 % make_plane(x(2:3), x(1), 0.75, 'b');
@@ -343,7 +348,7 @@ b = 0;  % for NLS
 % =========== main ==============
 for i = 1:step-1
 %         pause(0.5);
-    save SLAM_2D_data mode x k P '-append'
+    save SLAM_2D_data mode x P '-append'
     index = [];
     j_delet = 0;    % initialize index of goal point that need to be deleted
 %         if length(Le) == 0
@@ -364,6 +369,11 @@ for i = 1:step-1
 
     % get the control input
     tic
+    if norm(x(2:3) - [Le(1),Le(2)]') < 20
+        Le(1:2) = [];
+    end
+   
+
     u = getU(op, step, range, Le, k, i, x, P_last, P, u, hgoal);
     toc;
     tp = toc;
@@ -818,3 +828,4 @@ end
 if record == 1
     close(video);
 end
+

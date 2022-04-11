@@ -1,3 +1,5 @@
+
+
 function cv=GetCov(P,x,y)
 s=1; k=40;   % original: k=20, changed by zhan
 
