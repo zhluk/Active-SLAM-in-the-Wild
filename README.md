@@ -11,16 +11,16 @@ Link to paper's repo: https://github.com/MengyaXu/RIEKF-based-active-SLAM
 
 Instruction on how to download and run the code:
 
-cd <your-folder>
-git clone https://github.com/zhluk/Active-SLAM-in-the-Wild.git
+    cd ~/path_to_your_folder
+    git clone https://github.com/zhluk/Active-SLAM-in-the-Wild.git
 
 Stay on the main branch to run the modified original implementation 
 
-    To run the QP-baed implementation:
+To run the QP-based implementation:
     git checkout QP
 
 In the MATLAB command line, the following commands will run either implementation:
 
->> getNoise
->> map
->> active_IEKF
+    >> getNoise
+    >> map
+    >> active_IEKF
