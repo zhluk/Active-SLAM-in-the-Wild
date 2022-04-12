@@ -17,6 +17,7 @@ Instruction on how to download and run the code:
 Stay on the main branch to run the modified original implementation 
 
 To run the QP-based implementation:
+
     git checkout QP
 
 In the MATLAB command line, the following commands will run either implementation:
