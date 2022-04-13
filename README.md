@@ -14,13 +14,24 @@ Instruction on how to download and run the code:
 cd <your-folder>
 git clone https://github.com/zhluk/Active-SLAM-in-the-Wild.git
 
-Stay on the main branch to run the modified original implementation 
-
-    To run the QP-baed implementation:
-    git checkout QP
-
-In the MATLAB command line, the following commands will run either implementation:
-
->> getNoise
+Use the main branch code to run the modified original implementation
+    
+In the MATLAB command line, run this command to generate a map in 2D plane:
+    
+```
 >> map
+```
+
+Run this command to generate motion and measurement noise:
+
+```    
+>> getNoise
+```
+    
+Run this command to perfrom active slam:
+
+```    
 >> active_IEKF
+```
+
+Use the QP brach codes to run the Quadratic Program based motion planning method
