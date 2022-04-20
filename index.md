@@ -26,10 +26,20 @@ This paper presents a Right-Invariant EKF-based Active Simultaneous Localization
 ## Dataset
 We have used the Victoria Park dataset to test our hypothesis on the suggest Active SLAM strategy in the paper. The Victoria Park dataset was captured using a car mounted Laser scanner. The dataset is available [here](http://www-personal.acfr.usyd.edu.au/nebot/victoria_park.htm)
 ## Outputs on Covariance-based greedy approach
+Following are the results for the Active SLAM results on RIEKF with Covaraince based method for Motion Planning. 
+<center>
+<img src="assets/images/iekf_covariance.gif" alt="iekf_covariance" width="1000"/>
+<p><em>Results for Covariance-based greedy approach</span>.</em></p>
+</center>
 
 
 ## Outputs on QP-based approach
+Following are the results for the Active SLAM results on RIEKF with QP-based method for Motion Planning. 
+<center>
+<img src="assets/images/iekf_qp.gif" alt="iekf_QP" width="1000"/>
+<p><em>Results for QP-based approach</span>.</em></p>
+</center>
 
-
-
-## Future work
+## Conclusion and Future work
+This paper proposes a novel method applying RIEKF based active SLAM to a real world 2D dataset, and the use of QP as motion planning algorithm. It presents the methods for RIEKF, motion planning algorithms, and goal point selection, the simulation environment setup, the experiments, and the results. The results for the QP-based method, while showing less area coverage, yields less errors and more efficient navigation, with a more practical path for a real robot to follow.
+The future work for our project involves extending the experiments to other datasets to further confirm our findings. Since EKF-based methods are known to be prone to error accumulation, we suggest exploring non-EKF based active SLAM approaches with the same dataset and experiment setup. Furthermore the method could be extended to 3D datasets. Finally, alternative motion planning approaches such as model predictive control (MPC), sequential QP (SQP), multiple steps look-ahead, and collision-free motion planning can be explored. 
