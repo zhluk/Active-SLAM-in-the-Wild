@@ -11,7 +11,9 @@ layout: default
 </center>
 
 * * *
-
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/C4t_Rp5XkfE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 ## Abstract
 
 This paper presents a Right-Invariant EKF-based Active Simultaneous Localization and Mapping (SLAM) framework for a robot to explore a 2D environment with the goal of achieving low SLAM uncertainty while maximizing area coverage. Two motion planning methods are proposed to solve the active SLAM problem: a covariance-based greedy approach and a novel Quadratic Programming (QP)-based approach. The greedy model is a one-step look-ahead method, which moves in the direction of the lowest uncertainty in the robot’s pose and explores the map through a finite state machine. The QP-based approach drives the robot towards dynamically set goal points. Both methods are implemented on the well-known 2D Victoria Park dataset and localization is performed in relation to the landmarks (trees). Tuning hyper-parameters in the greedy-based approach allows it to make satisfactory area coverage at a high computational cost while the QP motion planning model sacrifices the area coverage for lower runtime. Our method does not make definitive improvements on current methods but features promising results.
