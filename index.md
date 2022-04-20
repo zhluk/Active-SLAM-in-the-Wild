@@ -4,9 +4,6 @@ layout: default
 
 <center>
 
-<p><em>
-We present Active SLAM in the Wild that focuses on using combination of SLAM and Motion planning methods to make an agent take decisons based on the changing environment.
-</em></p>
 
 <a href="https://github.com/zhluk/Active-SLAM-in-the-Wild" class="btn">Code</a>
 <!-- <a href="https://arxiv.org/abs/2112.03221" class="btn">Paper</a> -->
@@ -22,7 +19,7 @@ This paper presents a Right-Invariant EKF-based Active Simultaneous Localization
 ## Overview
  We start from an initial state and get a continuous stream of landmark data from the LiDAR sensor. This sensor data is fed into the active SLAM algorithm which first estimates robot pose and then uses the motion planning algorithm to actively estimate the next control inputs. For this project we have used RIEKF as the SLAM method and two different methods for motion planning, a covariance based greedy method and a Quadratic programming  based approach
 <center>
-<img src="figures/overall.PNG" alt="Pipeline" width="1000"/>
+<img src="assets/images/overall.PNG" alt="Pipeline" width="1000"/>
 <p><em>Overall block diagram showing our approach.</span>.</em></p>
 </center>
 

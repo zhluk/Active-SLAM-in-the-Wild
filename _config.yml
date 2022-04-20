@@ -1,0 +1,5 @@
+title: Active SLAM in the Wild
+description: We present Active SLAM in the Wild that focuses on using combination of SLAM and Motion planning methods to make an agent take decisons based on the changing environment.
+show_downloads: true
+google_analytics:
+theme: jekyll-theme-cayman
